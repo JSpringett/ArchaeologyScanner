@@ -37,7 +37,7 @@ for k in range(160):
 
             if thresh[i,j] == 255:
     	    #    line.append(j)
-                x, y = pol2cart(j, np.radians(k))
+                x, y = pol2cart((width/2 - j), np.radians(k))
                 z = i
                 target.write("v ")
                 target.write(str(x/100))
