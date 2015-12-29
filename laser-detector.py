@@ -16,9 +16,12 @@ target = open("./output.obj",  'w')
 ser = serial.Serial('/dev/tty.usbmodem1421', 19200)
 
 while(True):
-    ret, frame = cap.read();
-    frame = cv2.line(frame, (0, int(cap.get(4)) - 100), (int(cap.get(3)), int(cap.get(4)) - 100), (0,0,255),5)  
-    frame = cv2.line(frame, (int(cap.get(3) / 2), 0), (int(cap.get(3) / 2), int(cap.get(4))), (255,0,0),1)  
+    ret, frame = cap.read()
+    height, width, chans = frame.shape
+    print height
+    print width
+    cv2.line(frame, (0, int(height) - 100), (int(width), int(height) - 100), (0,0,255),5)
+    cv2.line(frame, (int(width / 2), 0), (int(width / 2), int(height)), (255,0,0),1)
     cv2.imshow("Initial", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
@@ -50,13 +53,12 @@ for k in range(160):
                 x, y = pol2cart((width/2 - j), np.radians(k))
                 z = i
                 target.write("v ")
-                target.write(str(x/float(100))
+                target.write(str(x/float(100)))
                 target.write(" ")
-                target.write(str(y/float(100))
+                target.write(str(y/float(100)))
                 target.write(" ")
-                target.write(str(z/float(100))
+                target.write(str(z/float(100)))
                 target.write("\n")
-                cv2.imshow('jhgjh', thresh)
 
 
                 break
