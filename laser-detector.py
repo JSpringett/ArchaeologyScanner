@@ -10,14 +10,14 @@ def pol2cart(rho, phi):
     return(x, y)
 
 scans = []
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 target = open("./output.obj",  'w')
 
-ser = serial.Serial('/dev/tty.usbmodem1421', 19200)
+#ser = serial.Serial('/dev/tty.usbmodem1421', 19200)
 
 for k in range(160):
     print k + 10
-    ser.write(str(k + 10))
+    #ser.write(str(k + 10))
     time.sleep(0.5)
 
     line = []
