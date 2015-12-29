@@ -13,7 +13,7 @@ scans = []
 cap = cv2.VideoCapture(0)
 target = open("./output.obj",  'w')
 
-#ser = serial.Serial('/dev/tty.usbmodem1421', 19200)
+ser = serial.Serial('/dev/tty.usbmodem1421', 19200)
 
 while(True):
     ret, frame = cap.read();
@@ -26,8 +26,7 @@ cv2.destroyAllWindows()
 
 for k in range(160):
     print k + 10
-    #ser.write(str(k + 10))
-    time.sleep(0.5)
+    ser.write(str(k + 10))
 
     line = []
     ret, frame = cap.read()
@@ -49,13 +48,13 @@ for k in range(160):
                 x, y = pol2cart((width/2 - j), np.radians(k))
                 z = i
                 target.write("v ")
-                target.write(str(x/100))
+                target.write(str(x/float(100)))
                 target.write(" ")
-                target.write(str(y/100))
+                target.write(str(y/float(100)))
                 target.write(" ")
-                target.write(str(z/100))
+                target.write(str(z/float(100)))
                 target.write("\n")
-                cv2.imshow('jhgjh', thresh)
+                #cv2.imshow('jhgjh', thresh)
 
 
                 break
