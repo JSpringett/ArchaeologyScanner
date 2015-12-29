@@ -13,21 +13,20 @@ scans = []
 cap = cv2.VideoCapture(0)
 target = open("./output.obj",  'w')
 
-ser = serial.Serial('/dev/tty.usbmodem1421', 19200)
+#ser = serial.Serial('/dev/tty.usbmodem1421', 19200)
 
+# Allows the user to setup the frame
 while(True):
     ret, frame = cap.read()
     height, width, chans = frame.shape
-    print height
-    print width
-    cv2.line(frame, (0, int(height) - 100), (int(width), int(height) - 100), (0,0,255),5)
+    cv2.line(frame, (0, int(height - (height/3))), (int(width), int(height - (height/3))), (0,0,255),5)
     cv2.line(frame, (int(width / 2), 0), (int(width / 2), int(height)), (255,0,0),1)
     cv2.imshow("Initial", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 cv2.destroyAllWindows()
 
-
+# Begins to capture the frame
 for k in range(160):
     print k + 10
     ser.write(str(k + 10))
@@ -41,7 +40,7 @@ for k in range(160):
     # Display
 
     height, width = thresh.shape
-    for i in range(height - 100):
+    for i in range(height - (height/300)):
         for j in range(width):
             #if j == width:
 
